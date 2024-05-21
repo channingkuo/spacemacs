@@ -344,15 +344,15 @@ Right justified, based on the Spacemacs buffers window width."
                               (intern (file-name-extension badge-path))))
                     (create-image badge-path)))
            (badge-size (when badge (car (image-size badge))))
-           (build-by (concat "Made with "
+           (build-by (concat "My "
                              (if (and dotspacemacs-startup-buffer-show-icons
                                       (display-graphic-p)
                                       (or (fboundp 'all-the-icons-faicon)
                                           (require 'all-the-icons nil 'noerror)))
                                  (all-the-icons-faicon "heart" :height 0.8 :v-adjust -0.05)
                                "heart")
-                             " by the community"))
-           (proudly-free "Proudly free software")
+                             " belongs to you."))
+           (proudly-free "Kuo . Dan")
            (gplv3-path spacemacs-gplv3-official-png)
            (gplv3 (when (and (display-graphic-p)
                              (image-type-available-p
@@ -371,11 +371,12 @@ Right justified, based on the Spacemacs buffers window width."
       (spacemacs-buffer//center-line (length build-by))
       (insert "\n\n")
       (widget-create 'url-link
-                     :tag proudly-free
-                     :help-echo "What is free software?"
-                     :mouse-face 'highlight
-                     :follow-link "\C-m"
-                     "https://www.gnu.org/philosophy/free-sw.en.html")
+                    :tag proudly-free
+      ;;               :help-echo "What is free software?"
+                    :help-echo 'build-by
+                    :mouse-face 'highlight
+                    :follow-link "\C-m")
+      ;;               "https://www.gnu.org/philosophy/free-sw.en.html")
       (spacemacs-buffer//center-line (+ 2 (length proudly-free)))
       (when gplv3
         (insert "\n\n")
