@@ -58,7 +58,8 @@
       "ss" 'pdf-occur
       "p" 'pdf-misc-print-document
       "O" 'pdf-outline
-      "n" 'pdf-view-midnight-minor-mode)
+      "n" 'pdf-view-midnight-minor-mode
+      "t" 'pdf-view-themed-minor-mode)
 
     (evil-define-key 'visual pdf-view-mode-map
       "y" 'pdf-view-kill-ring-save
@@ -110,9 +111,7 @@
       "k"                'previous-line
       "gk"               'outline-backward-same-level
       "gj"               'outline-forward-same-level
-      (kbd "<backtab>")  (if (version< emacs-version "28.0")
-                             'outline-show-all
-                           'outline-cycle-buffer)
+      (kbd "<backtab>")  'outline-cycle-buffer
       "gh"               'pdf-outline-up-heading
       "gg"               'beginning-of-buffer
       "G"                'pdf-outline-end-of-buffer

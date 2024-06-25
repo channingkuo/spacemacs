@@ -152,7 +152,8 @@ as the pyenv version then also return nil. This works around https://github.com/
 (defun spacemacs//python-setup-shell (&optional root-dir)
   "Setup the python shell if no customer prefered value or the value be cleaned.
 ROOT-DIR should be the directory path for the environment, `nil' for clean up."
-  (when (or (null python-shell-interpreter)
+  (when (or (null (boundp 'python-shell-interpreter))
+            (null python-shell-interpreter)
             (equal python-shell-interpreter spacemacs--python-shell-interpreter-origin))
     (if-let* ((default-directory root-dir))
         (if-let* ((ipython (cl-find-if 'spacemacs/pyenv-executable-find
@@ -422,6 +423,33 @@ Bind formatter to '==' for LSP and '='for all other backends."
 
 
 ;; REPL
+(defun spacemacs/python-shell-send-block (&optional arg)
+  "Send the block under cursor to shell. If optional argument ARG is non-nil
+(interactively, the prefix argument), send the block body with its header."
+  (interactive "P")
+  (if (fboundp 'python-shell-send-block)
+      (let ((python-mode-hook nil))
+        (call-interactively #'python-shell-send-block))
+    (let ((python-mode-hook nil)
+          (beg (save-excursion
+                 (when (python-nav-beginning-of-block)
+                   (if arg
+                       (beginning-of-line)
+                     (python-nav-end-of-statement)
+                     (beginning-of-line 2)))
+                 (point-marker)))
+          (end (save-excursion (python-nav-end-of-block)))
+          (python-indent-guess-indent-offset-verbose nil))
+      (if (and beg end)
+          (python-shell-send-region beg end nil msg t)
+        (user-error "Can't get code block from current position.")))))
+
+(defun spacemacs/python-shell-send-block-switch (&optional arg)
+  "Send block to shell and switch to it in insert mode."
+  (interactive "P")
+  (call-interactively #'spacemacs/python-shell-send-block)
+  (python-shell-switch-to-shell)
+  (evil-insert-state))
 
 (defun spacemacs/python-shell-send-buffer-switch ()
   "Send buffer content to shell and switch to it in insert mode."

@@ -79,6 +79,7 @@ the [[file:CHANGELOG.org][CHANGELOG.org]] file.
   Andriy Kmit)
 - Add support for background transparency aka true transparency. Key bindings are under ~SPC T B~ (thanks to JoshTRN)
 - Binding the ~SPC f d~ for deleting current buffer and file (thanks to Lin Sun)
+- Deprecate =company-elm= backend in =elm= layer (thanks to Qynn Schwaab)
 *** Breaking Changes
 **** Major
 - Support for Emacs 25 or Emacs 26 has been dropped, the minimal Emacs version
@@ -1510,6 +1511,8 @@ Other:
   - Set =evil-undo-system= to =undo-tree= (thanks to duianto)
   - Checked that =evil-undo-system= exists before it's called (thanks to khjcph)
   - Fixed ~SPC w TAB~ golden-ratio resizing.
+  - Fixed ~SPC h f~ =helm-spacemacs-help-faq= again by fixing
+    helm-spacemacs-help//get-faq-headings-list (thanks to greenrecyclebin)
 *** Layer changes and fixes
 **** Agda
 - Fixes
@@ -3989,6 +3992,8 @@ files (thanks to Daniel Nicolai)
   - DOCUMENTATION.org:
     - Fixed the example for how to change the separator style
       (thanks to Trey Merkley)
+    - Added documentation for navigating to next source in helm-find-file
+      (thanks to Lucas Leblow)
   - README.md:
     - Fixed macOS documentation to install fonts (thanks to Sergio Morales)
     - Updated Windows section, suggest official Emacs (thanks to ghost-420)
