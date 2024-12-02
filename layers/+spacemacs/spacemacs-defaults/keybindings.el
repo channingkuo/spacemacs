@@ -26,81 +26,81 @@
 ;; ---------------------------------------------------------------------------
 
 ;; We define prefix commands only for the sake of which-key
-(setq spacemacs/key-binding-prefixes `(,dotspacemacs-emacs-command-key "M-x"
-                                       "!"   "shell cmd"
-                                       "*"   "search project w/input"
-                                       "/"   "search project"
-                                       "?"   "show keybindings"
-                                       "a"   "applications"
-                                       "ac"  "chat"
-                                       "ae"  "email"
-                                       "af"  "fun"
-                                       "ar"  "readers"
-                                       "am"  "music"
-                                       "at"  "tools"
-                                       "ats" "shells"
-                                       "atT" "translate"
-                                       "aw"  "web-services"
-                                       "c"   "compile/comments"
-                                       "C"   "capture/colors"
-                                       "e"   "errors"
-                                       "g"   "git/versions-control"
-                                       "h"   "help"
-                                       "hd"  "help-describe"
-                                       "hP"  "profiler"
-                                       "hT"  "tutorials"
-                                       "i"   "insertion"
-                                       "j"   "jump/join/split"
-                                       "jj"  "avy timer"
-                                       "jl"  "avy line"
-                                       "js"  "split sexp"
-                                       "jw"  "avy word"
-                                       "k"   "lisp"
-                                       "kd"  "delete"
-                                       "kD"  "delete-backward"
-                                       "k`"  "hybrid"
-                                       "m"   "major mode commands"
-                                       "n"   "narrow/numbers"
-                                       "N"   "navigation"
-                                       "o"   "user bindings"
-                                       "p"   "projects"
-                                       "q"   "quit"
-                                       "r"   "registers/rings/resume"
-                                       "rd"  "purpose-toggle-window"
-                                       "s"   "search/symbol"
-                                       "sa"  "ag"
-                                       "sg"  "grep"
-                                       "sk"  "ack"
-                                       "sp"  "search project"
-                                       "sP"  "search project w/input"
-                                       "sr"  "ripgrep"
-                                       "st"  "pt"
-                                       "sw"  "web"
-                                       "t"   "toggles"
-                                       "tC"  "colors"
-                                       "tE"  "editing-styles"
-                                       "tEe" "emacs (holy-mode)"
-                                       "tEh" "hybrid (hybrid-mode)"
-                                       "th"  "highlight"
-                                       "tm"  "modeline"
-                                       "tt"  "timeclock"
-                                       "T"   "UI toggles/themes"
-                                       "C-t" "other toggles"
-                                       "u"   "universal arg"
-                                       "v"   "expand region"
-                                       "w"   "windows"
-                                       "wc"  "centered"
-                                       "wp"  "popup"
-                                       "x"   "text"
-                                       "xa"  "align"
-                                       "xd"  "delete"
-                                       "xg"  "google-translate"
-                                       "xj"  "justification"
-                                       "xl"  "lines"
-                                       "xR"  "Randomize"
-                                       "xt"  "transpose"
-                                       "xw"  "words"
-                                       "z"   "zoom"))
+(defconst spacemacs/key-binding-prefixes
+  (list dotspacemacs-emacs-command-key "M-x"
+        "!"   "shell cmd"
+        "*"   "search project w/input"
+        "/"   "search project"
+        "?"   "show keybindings"
+        "a"   "applications"
+        "ac"  "chat"
+        "ae"  "email"
+        "af"  "fun"
+        "ar"  "readers"
+        "am"  "music"
+        "at"  "tools"
+        "ats" "shells"
+        "atT" "translate"
+        "aw"  "web-services"
+        "c"   "compile/comments"
+        "C"   "capture/colors"
+        "e"   "errors"
+        "g"   "git/versions-control"
+        "h"   "help"
+        "hd"  "help-describe"
+        "hP"  "profiler"
+        "hT"  "tutorials"
+        "i"   "insertion"
+        "j"   "jump/join/split"
+        "jj"  "avy timer"
+        "jl"  "avy line"
+        "js"  "split sexp"
+        "jw"  "avy word"
+        "k"   "lisp"
+        "kd"  "delete"
+        "kD"  "delete-backward"
+        "k`"  "hybrid"
+        "m"   "major mode commands"
+        "n"   "narrow/numbers"
+        "N"   "navigation"
+        "o"   "user bindings"
+        "p"   "projects"
+        "q"   "quit"
+        "r"   "registers/rings/resume"
+        "rd"  "purpose-toggle-window"
+        "s"   "search/symbol"
+        "sa"  "ag"
+        "sg"  "grep"
+        "sk"  "ack"
+        "sp"  "search project"
+        "sP"  "search project w/input"
+        "sr"  "ripgrep"
+        "st"  "pt"
+        "sw"  "web"
+        "t"   "toggles"
+        "tC"  "colors"
+        "tE"  "editing-styles"
+        "tEe" "emacs (holy-mode)"
+        "tEh" "hybrid (hybrid-mode)"
+        "th"  "highlight"
+        "tm"  "modeline"
+        "tt"  "timeclock"
+        "T"   "UI toggles/themes"
+        "C-t" "other toggles"
+        "u"   "universal arg"
+        "v"   "expand region"
+        "w"   "windows"
+        "wc"  "centered"
+        "wp"  "popup"
+        "x"   "text"
+        "xa"  "align"
+        "xd"  "delete"
+        "xg"  "google-translate"
+        "xj"  "justification"
+        "xl"  "lines"
+        "xt"  "transpose"
+        "xw"  "words"
+        "z"   "zoom"))
 (apply #'spacemacs/declare-prefix spacemacs/key-binding-prefixes)
 
 ;; instantly display current keystrokes in mini buffer
@@ -109,7 +109,7 @@
 (define-key global-map (kbd "RET") 'newline-and-indent)
 
 ;; improve delete-other-windows
-(define-key global-map (kbd "C-x 1") 'spacemacs/toggle-maximize-buffer)
+(define-key global-map (kbd "C-x 1") 'spacemacs/toggle-maximize-window)
 ;; adds two spacing modes while preserving just-one-space behaviour
 (define-key global-map (kbd "M-SPC") 'cycle-spacing)
 
@@ -130,12 +130,6 @@
 ;; Also bind C-n C-p in minibuffer
 (define-key minibuffer-local-map (kbd "C-n") 'next-line-or-history-element)
 (define-key minibuffer-local-map (kbd "C-p") 'previous-line-or-history-element)
-
-;; linum margin bindings-------------------------------------------------------
-(global-set-key (kbd "<left-margin> <down-mouse-1>") 'spacemacs/md-select-linum)
-(global-set-key (kbd "<left-margin> <mouse-1>") 'spacemacs/mu-select-linum)
-(global-set-key (kbd "<left-margin> <double-mouse-1>") 'spacemacs/select-current-block)
-(global-set-key (kbd "<left-margin> <drag-mouse-1>") 'spacemacs/mu-select-linum)
 
 ;; ---------------------------------------------------------------------------
 ;; spacemacs leader key bindings
@@ -200,8 +194,7 @@
 (spacemacs/set-leader-keys
   "a*"  'calc-dispatch
   "ap"  'list-processes
-  "aP"  'proced
-  "au"  'undo-tree-visualize)
+  "aP"  'proced)
 ;; easy pg ----------------------------------------------------------------------
 (spacemacs|spacebind
  "Encrypt / decrypt files with Easy PG"
@@ -675,7 +668,7 @@ respond to this toggle."
   "w <S-right>"  'evil-window-move-far-right
   "wl"  'evil-window-right
   "w <right>"  'evil-window-right
-  "wm"  'spacemacs/toggle-maximize-buffer
+  "wm"  'spacemacs/toggle-maximize-window
   ;; "wcc"  'spacemacs/toggle-centered-buffer
   ;; "wcC"  'spacemacs/toggle-distraction-free
   ;; "wc."  'spacemacs/centered-buffer-transient-state
@@ -685,8 +678,7 @@ respond to this toggle."
   "ws"  'split-window-below
   "wS"  'split-window-below-and-focus
   "w-"  'split-window-below
-  "wU"  'winner-redo
-  "wu"  'winner-undo
+  "wu"  'spacemacs/winner-transient-state/winner-undo
   "wv"  'split-window-right
   "wV"  'split-window-right-and-focus
   "ww"  'other-window
@@ -950,7 +942,7 @@ Select: _a_ _h_ _j_ _k_ _l_ _w_ _0_.._9_ Move: _H_ _J_ _K_ _L_ _r_ _R_ Split: _s
   ("v" split-window-right)
   ("V" split-window-right-and-focus)
   ("/" split-window-right-and-focus)
-  ("m" spacemacs/toggle-maximize-buffer)
+  ("m" spacemacs/toggle-maximize-window)
   ("|" spacemacs/maximize-vertically)
   ("_" spacemacs/maximize-horizontally)
   ;; Resize

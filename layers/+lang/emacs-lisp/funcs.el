@@ -145,13 +145,32 @@ Intended for use in mode hooks."
 (defun spacemacs//make-elisp-buffers-format-on-save-maybe ()
   "Add a function to format buffers on save when required."
   (when emacs-lisp-format-on-save
-    (add-hook 'emacs-lisp-mode-hook #'spacemacs//make-buffer-format-on-save nil nil)))
+    (add-hook 'emacs-lisp-mode-hook #'spacemacs//make-elisp-buffer-format-on-save)))
 
-(defun spacemacs//make-buffer-format-on-save ()
+(defun spacemacs//make-elisp-buffer-format-on-save ()
   "Make sure that this buffer is formatted on save"
-  (add-hook 'before-save-hook #'spacemacs//format-buffer nil t))
+  (add-hook 'before-save-hook #'spacemacs//format-elisp-buffer nil t))
 
-(defun spacemacs//format-buffer ()
+(defun spacemacs//format-elisp-buffer ()
   "Format the given buffer if required."
   (when emacs-lisp-format-on-save
-    (spacemacs/indent-region-or-buffer)))
+    (indent-region (point-min) (point-max))
+    (whitespace-cleanup)))
+
+
+
+;; ERT commands
+
+(defun spacemacs//find-ert-test-buffer (ert-test)
+  "Return the buffer where ERT-TEST is defined."
+  (save-excursion
+    (car (find-definition-noselect (ert-test-name ert-test) 'ert-deftest))))
+
+(defun spacemacs/ert-run-tests-buffer ()
+  "Run all the tests in the current buffer."
+  (interactive)
+  (save-buffer)
+  (load-file (buffer-file-name))
+  (let ((cbuf (current-buffer)))
+    (ert '(satisfies (lambda (test)
+                       (eq cbuf (spacemacs//find-ert-test-buffer test)))))))

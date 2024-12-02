@@ -390,7 +390,7 @@ If perspective NAME does not already exist, create it and add any
 buffers that belong to the current buffer's project."
   (if (persp-with-name-exists-p name)
       (message "There is already a perspective named %s" name)
-    (if-let ((project (projectile-project-p)))
+    (if-let* ((project (projectile-project-p)))
         (spacemacs||switch-layout name
           :init
           (persp-add-buffer (projectile-project-buffers project)
@@ -934,11 +934,10 @@ FRAME defaults to the current frame."
                                   frame))
 
 (defun spacemacs//fixup-window-configs (orig-fn newname &optional unique)
-  "Update the buffer's name in the eyebrowse window-configs of any perspectives
-containing the buffer."
+  "Update the buffer's name in the eyebrowse window-configs of all perspectives."
   (let* ((old (buffer-name))
          (new (funcall orig-fn newname unique)))
-    (dolist (persp (persp--buffer-in-persps (current-buffer)))
+    (dolist (persp (persp-persps))
       (dolist (window-config
                (append (persp-parameter 'gui-eyebrowse-window-configs persp)
                        (persp-parameter 'term-eyebrowse-window-configs persp)))

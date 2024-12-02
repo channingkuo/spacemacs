@@ -31,8 +31,7 @@
     smartparens))
 
 
-(defun rust/post-init-counsel-gtags ()
-  (spacemacs/counsel-gtags-define-keys-for-mode 'rustic-mode))
+(defun rust/post-init-counsel-gtags nil)
 
 (defun rust/pre-init-dap-mode ()
   (when (eq rust-backend 'lsp)
@@ -73,7 +72,7 @@
       "cU" 'rustic-cargo-upgrade
       "cv" 'rustic-cargo-check
       "cx" 'rustic-cargo-run
-      "ta" 'rustic-cargo-test
+      "ta" 'rustic-cargo-test-run
       "tt" 'rustic-cargo-current-test)
 
     (with-eval-after-load 'flycheck
